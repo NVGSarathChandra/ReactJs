@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useState, useEffect } from 'react';
 import { Card } from 'reactstrap';
 import './ExpenseItem.css';
 import './ExpenseDate.css';
@@ -17,9 +17,15 @@ export default function ExpenseItem(props) {
             expenseAmount: '$152.50'
         },
     ]
+    const expensesData = expenses;
+    const titleChange = (event) => {
+        // event.expenseTitle
+        console.log('titleChange event', event)
+       
+    }
     const menu = () =>
-        expenses.map(item => (
-            <div className="expense-item">
+        expensesData.map((item, index) => (
+            <div className="expense-item" key={item.expenseTitle + '-' + index}>
                 <div className="expense-date">
                     <div className="expense-date__month">{item?.expenseDate.toLocaleString('en-US', { month: 'long' })}</div>
                     <div className="expense-date__date">{item?.expenseDate.toLocaleString('en-US', { day: '2-digit' })}</div>
@@ -29,6 +35,8 @@ export default function ExpenseItem(props) {
                 <div className="expense-item__description">
                     <h2>{item.expenseTitle} </h2>
                     <div className="expense-item__price">{item.expenseAmount}</div>
+                    <input type="date" />
+                    <button onClick={titleChange}>Click change</button>
                 </div>
                 </div>
         )
